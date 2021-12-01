@@ -1,0 +1,17 @@
+#gameBoardContainer {
+    display: grid;
+    height: 800px;
+    width: 800px;
+    border: 1px solid black;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr; 
+
+}
+
+.gameBoardSquare {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
