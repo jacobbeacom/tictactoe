@@ -115,19 +115,7 @@ const displayController = (function() {
         currentTurn,
         square
     };
-    })();
-
-
-
-    // const _boardSquares = document.getElementsByClassName('gameBoardSquare');
-    // for (let p = 0; p < _boardSquares.length; p++) {
-    //     _boardSquares[p].addEventListener('click', () => {       
-    //         let id = _boardSquares[p].id;
-    //         let result = player1.playerMove(id);
-    //             if (result == 'success') {
-    //                 gameBoard.board[i][j] = player1.marker;
-
-//})   
+})();
 
 
 
