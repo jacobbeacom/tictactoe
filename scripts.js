@@ -81,7 +81,8 @@ const displayController = (function() {
         }
         currentTurn = player1.name;
         totalMoves = 0;
-        gameState = 'playing';    
+        gameState = 'playing';
+        updateDisplay();  
     }
     const checkDraw = (totalMoves) => {
         if (totalMoves == 9 && gameState != 'over') {
@@ -91,7 +92,9 @@ const displayController = (function() {
     }};
     let currentTurn = player1.name;
     const currentTurnDisplay = document.getElementById('currentTurn');
-    const updateDisplay = () => currentTurnDisplay.textContent = currentTurn;
+    const updateDisplay = () => currentTurnDisplay.textContent = `Current Turn: ${currentTurn}`;
+    const resetButton = document.getElementById('reset');
+    resetButton.addEventListener('click', resetGame);
     const makeSquares = () => {
         for (let i = 0; i < gameBoard.board.length; i++) {
             for (let j = 0; j < gameBoard.board[i].length; j++) {
@@ -139,7 +142,7 @@ const displayController = (function() {
             }
         }
     };
-
+    updateDisplay();
     makeSquares();
     return {
         totalMoves,
