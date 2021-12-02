@@ -68,6 +68,11 @@ const displayController = (function() {
     let square;
     const container = document.getElementById('gameBoardContainer');
     let totalMoves = 0;
+    let gameState;
+    const checkDraw = () => {
+        if (totalMoves == 9 && gameState != 'over') {
+        alert("Sorry, looks like a tie.");
+    }};
     let currentTurn = player1.name;
     const currentTurnDisplay = document.getElementById('currentTurn');
     const updateDisplay = () => currentTurnDisplay.textContent = currentTurn;
@@ -82,9 +87,11 @@ const displayController = (function() {
                         gameBoard.board[i][j] = player1.marker;
                         player1.playerMove([i],[j]);
                         totalMoves++;
+                        checkDraw();
                         let results = gameBoard.checkWinConditions();
                             if (results == true) {
                                 alert(`${player1.name} Wins!`);
+                                gameState = 'over';
                             }
                             else {
                             };
@@ -95,20 +102,24 @@ const displayController = (function() {
                         gameBoard.board[i][j] = player2.marker;
                         player2.playerMove([i],[j]);
                         totalMoves++;
+                        checkDraw();
                         let results = gameBoard.checkWinConditions();
                             if (results == true) {
                                 alert(`${player2.name} Wins!`);
+                                gameState = 'over';
                             }
                             else {
                             };
                         currentTurn = player1.name;
                         updateDisplay();
                     }
+                return totalMoves;
                 });
                 container.appendChild(square);
-                }
             }
+        }
     };
+
     makeSquares();
     return {
         totalMoves,
