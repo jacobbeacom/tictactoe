@@ -69,9 +69,23 @@ const displayController = (function() {
     const container = document.getElementById('gameBoardContainer');
     let totalMoves = 0;
     let gameState;
-    const checkDraw = () => {
+    const resetGame = () => {
+        let square = document.getElementsByClassName('gameBoardSquare');
+            for (i = 0; i < square.length; i++) {
+                square[i].textContent = "";
+            }
+        for (i = 0; i < gameBoard.board.length; i++) {
+            for (p = 0; p < gameBoard.board[i].length; p++) {
+                gameBoard.board[i][p] = "";
+            }
+        }
+        currentTurn = player1.name;    
+    }
+    const checkDraw = (totalMoves) => {
         if (totalMoves == 9 && gameState != 'over') {
         alert("Sorry, looks like a tie.");
+        gameState = 'over';
+        resetGame();
     }};
     let currentTurn = player1.name;
     const currentTurnDisplay = document.getElementById('currentTurn');
@@ -87,11 +101,12 @@ const displayController = (function() {
                         gameBoard.board[i][j] = player1.marker;
                         player1.playerMove([i],[j]);
                         totalMoves++;
-                        checkDraw();
+                        checkDraw(totalMoves);
                         let results = gameBoard.checkWinConditions();
                             if (results == true) {
                                 alert(`${player1.name} Wins!`);
                                 gameState = 'over';
+                                resetGame();
                             }
                             else {
                             };
@@ -102,11 +117,12 @@ const displayController = (function() {
                         gameBoard.board[i][j] = player2.marker;
                         player2.playerMove([i],[j]);
                         totalMoves++;
-                        checkDraw();
+                        checkDraw(totalMoves);
                         let results = gameBoard.checkWinConditions();
                             if (results == true) {
                                 alert(`${player2.name} Wins!`);
                                 gameState = 'over';
+                                resetGame();
                             }
                             else {
                             };
@@ -124,7 +140,8 @@ const displayController = (function() {
     return {
         totalMoves,
         currentTurn,
-        square
+        square,
+        checkDraw
     };
 })();
 
