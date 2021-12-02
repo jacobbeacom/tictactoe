@@ -68,7 +68,7 @@ const displayController = (function() {
     let square;
     const container = document.getElementById('gameBoardContainer');
     let totalMoves = 0;
-    let gameState;
+    let gameState = 'playing'
     const resetGame = () => {
         let square = document.getElementsByClassName('gameBoardSquare');
             for (i = 0; i < square.length; i++) {
@@ -79,7 +79,9 @@ const displayController = (function() {
                 gameBoard.board[i][p] = "";
             }
         }
-        currentTurn = player1.name;    
+        currentTurn = player1.name;
+        totalMoves = 0;
+        gameState = 'playing';    
     }
     const checkDraw = (totalMoves) => {
         if (totalMoves == 9 && gameState != 'over') {
@@ -101,6 +103,7 @@ const displayController = (function() {
                         gameBoard.board[i][j] = player1.marker;
                         player1.playerMove([i],[j]);
                         totalMoves++;
+                        console.log(totalMoves);
                         checkDraw(totalMoves);
                         let results = gameBoard.checkWinConditions();
                             if (results == true) {
@@ -117,6 +120,7 @@ const displayController = (function() {
                         gameBoard.board[i][j] = player2.marker;
                         player2.playerMove([i],[j]);
                         totalMoves++;
+                        console.log(totalMoves);
                         checkDraw(totalMoves);
                         let results = gameBoard.checkWinConditions();
                             if (results == true) {
